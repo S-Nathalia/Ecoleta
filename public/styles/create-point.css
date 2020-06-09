@@ -42,7 +42,8 @@ form h1 {
 }
 
 form fieldset {
-    margin-top:  64px;
+    border:0 none;
+    margin-top: 64px;
 }
 
 form legend {
@@ -153,3 +154,5 @@ form button:hover {
 .items-grid li span {
     pointer-events: none;
 }
+
+/* TODO: barra fixa após x de scroll  */
