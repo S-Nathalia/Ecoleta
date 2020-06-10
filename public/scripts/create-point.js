@@ -1,20 +1,54 @@
-function populateUFs() {
+// Array que irá composto pelas opções do menu de escolha de estado
+var array_estados = [];
+
+function ordenarEstados() {
     const ufSelect = document.querySelector("select[name=uf]")
 
+    // Ordena os estados
+    array_estados.sort(function compararEstados(a, b) {
+        var novo_ar = []
+        // Tem que dar split, se não irá ordenar pelo id, não pelo nome
+        var a_com_split = a.split('>') 
+        var b_com_split = b.split('>')
+        novo_ar.push(a_com_split[1]); 
+        novo_ar.push(b_com_split[1]); 
+        novo_ar.sort();
+        if(novo_ar[0] == a_com_split[1]){
+            return -1;
+        } else if(novo_ar[0] == b_com_split[1]) {
+            return 1;
+        }
+        return 0;
+    })
+
+    // Concatena os estados ordenados no ufSelect
+    for(var i = 0; i < array_estados.length; i++) {
+        ufSelect.innerHTML += array_estados[i];
+    }
+    console.log(array_estados);
+    console.log(ufSelect);
+
+}
+
+// Consulta os estados pela API
+function populateUFs() {
     fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
     .then(res => res.json())
     .then (states => {
         for(const state of states){
-            ufSelect.innerHTML += `<option value="${state.id}">${state.nome}</option>`
+            // Armazena as opções de estados no array_estados
+            array_estados.push(`<option value="${state.id}">${state.nome}</option>`);
         }
-    })
-}
+        this.ordenarEstados()
+    });
+ }
 
-populateUFs()
+
+populateUFs();
 
 function getCities(event) {
     const citySelect = document.querySelector("select[name=city]")
-    const stateInput = document.querySelector("[name=state]")
+    const stateInput = document.querySelector("[name=state")
 
     const ufValue = event.target.value
 
@@ -53,7 +87,7 @@ for(const item of itemsToCollect){
     item.addEventListener("click", handleSelectedItem)
 }
 
-const collectedItems = documento.querySelector("input[name-items]")
+const collectedItems = document.querySelector("input[name-items]")
 let selectedItems = []
 
 function handleSelectedItem(event) {
