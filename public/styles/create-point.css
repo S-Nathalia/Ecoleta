@@ -48,10 +48,22 @@ form fieldset {
 
 form legend {
     margin-bottom: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
 }
 
 form legend h2 {
     font-size: 24px;
+}
+
+form legend span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--title-color);
 }
 
 form .field {
@@ -155,4 +167,4 @@ form button:hover {
     pointer-events: none;
 }
 
-/* TODO: barra fixa após x de scroll  */
+/* TODO: barra fixa após X de scroll  */
